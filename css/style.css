@@ -83,6 +83,62 @@ section {
     padding: 10rem 9% 2rem;
 }
 
+/* HOME SECTION IMAGE STYLES */
+/* css/style.css */
+
+/* Replace the old image styles with these new ones */
+/* HOME SECTION IMAGE STYLES */
+.home {
+    justify-content: center; /* This brings the items closer */
+    align-items: center;
+    gap: 6rem; /* This controls the distance between text and image */
+}
+
+.home-image-wrapper {
+    position: relative;
+    width: 35rem;  /* Adjusted width for a portrait rectangle */
+    height: 42rem; /* Adjusted height for a portrait rectangle */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* The floating animation is kept */
+    animation: floatAnimation 4s ease-in-out infinite;
+}
+
+.home-image-shape {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 1.5rem; /* Changed from 50% to rounded corners */
+    border: .3rem solid var(--main-color);
+    overflow: hidden; /* This makes the image inside have rounded corners too */
+    transition: .5s ease;
+    /* The transform to push the image is removed */
+}
+
+.home-image-wrapper:hover .home-image-shape {
+    box-shadow: 0 0 2.5rem var(--main-color);
+    transform: scale(1.02); /* Adjusted hover effect */
+}
+
+.home-image-shape img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Keyframes for the floating animation (no changes here) */
+@keyframes floatAnimation {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-2rem);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
 .home {
     display: flex;
     align-items: center;
@@ -217,11 +273,10 @@ section {
 }
 
 .home-sci {
-    position: absolute;
-    bottom: 4rem;
-    width: 170px;
+    position: relative; /* This keeps it in the normal flow of the page */
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 3rem;
 }
 
 .home-sci a {
@@ -266,7 +321,7 @@ section {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    gap: 2rem;
+    gap: 0rem;
     background: var(--second-bg-color);
     padding-bottom: 6rem;
 }
@@ -281,35 +336,37 @@ section {
 span {
     color: var(--main-color);
 }
-
 .about-img {
     position: relative;
-    width: 25rem;
-    height: 25rem;
-    border-radius: 50%;
+    width: 35rem;
+    height: 35rem; /* Keep width and height equal */
+    border-radius: 50%; /* Makes it circular */
+    overflow: hidden; /* Ensures image doesn't overflow */
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .about-img img {
-    width: 90%;
+    width: 100%;
+    height: 100%; /* Make image fill container */
+    object-fit: cover; /* Keeps aspect ratio and fills the circle */
     border-radius: 50%;
-    border: .2rem solid var(--main-color);
+    border: 0.2rem solid var(--main-color);
 }
 
 .about-img .circle-spin {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) rotate(0);
+    transform: translate(-50%, -50%) rotate(0deg);
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    border-top: .2rem solid var(--second-bg-color);
-    border-bottom: .2rem solid var(--second-bg-color);
-    border-left: .2rem solid var(--main-color);
-    border-right: .2rem solid var(--main-color);
+    border-top: 0.2rem solid var(--second-bg-color);
+    border-bottom: 0.2rem solid var(--second-bg-color);
+    border-left: 0.2rem solid var(--main-color);
+    border-right: 0.2rem solid var(--main-color);
     animation: aboutSpinner 8s linear infinite;
 }
 
@@ -429,124 +486,149 @@ span {
     padding-top: .5rem;
 }
 
+/* ===== Skills Section (Left-Right Layout) ===== */
+/* ===== Skills Section ===== */
 .skills {
-    min-height: auto;
-    padding-bottom: 7rem;
-    background: var(--second-bg-color);
+  background: var(--second-bg-color);
+  padding: 80px 10%;
 }
 
-.skills h2 {
-    display: inline-block;
-    left: 50%;
-    transform: translateX(-50%);
+.skills .heading {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 60px;
+  color: var(--text-color);
 }
 
-.skills .skills-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5rem;
+.skills .heading span {
+  color: var(--main-color);
 }
 
-.skills-row .skills-column {
-    flex: 1 1 40rem;
+/* ===== Two-Side Layout ===== */
+.skills-layout {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
 }
 
-.skills-column .title {
-    position: relative;
-    display: inline-block;
-    font-size: 2.5rem;
-    margin: 0 0 1.5rem;
+/* Center Dotted Line */
+.center-line {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  height: 100%;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--main-color),
+    var(--main-color) 6px,
+    transparent 6px,
+    transparent 14px
+  );
+  opacity: 0.7;
 }
 
-.skills-column .skills-box {
-    position: relative;
+/* Left and Right Sides */
+.side {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  position: relative;
+  z-index: 2;
 }
 
-.skills-box .skills-content {
-    position: relative;
-    border: .2rem solid var(--main-color);
-    border-radius: .6rem;
-    padding: .5rem 1.5rem;
-    z-index: 1;
-    overflow: hidden;
+.side.left {
+  align-items: flex-end;
+  text-align: right;
 }
 
-.skills-box .skills-content::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 0;
-    height: 100%;
-    background: var(--bg-color);
-    z-index: -1;
-    transition: .5s;
+.side.right {
+  align-items: flex-start;
+  text-align: left;
 }
 
-.skills-box .skills-content:hover::before {
+/* Category Headings */
+.category-title {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--main-color);
+  margin-bottom: 15px;
+}
+
+/* Skills Grid */
+.skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: flex-end;
+}
+
+.side.right .skills-grid {
+  justify-content: flex-start;
+}
+
+/* Individual Skill Cards */
+.skill-card {
+  background: var(--bg-color);
+  border-radius: 12px;
+  padding: 15px;
+  width: 110px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  transition: 0.4s ease;
+  border: 2px solid transparent;
+}
+
+.skill-card:hover {
+  border-color: var(--main-color);
+  transform: translateY(-8px);
+  box-shadow: 0 0 20px var(--main-color);
+}
+
+.skill-card i {
+  font-size: 2rem;
+  color: var(--main-color);
+  margin-bottom: 8px;
+}
+
+.skill-card h4 {
+  color: var(--text-color);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* ===== Responsive ===== */
+@media screen and (max-width: 900px) {
+  .skills-layout {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .center-line {
+    display: none;
+  }
+
+  .side {
     width: 100%;
+    align-items: center;
+    text-align: center;
+  }
+
+  .skills-grid {
+    justify-content: center !important;
+  }
 }
 
-.skills-content .progress {
-    padding: 1rem 0;
-}
 
-.skills-content .progress h3 {
-    font-size: 1.7rem;
-    display: flex;
-    justify-content: space-between;
-}
 
-.skills-content .progress h3 span {
-    color: var(--text-color);
-}
-
-.skills-content .progress .bar {
-    height: 2.5rem;
-    border-radius: .6rem;
-    border: .2rem solid var(--main-color);
-    padding: .5rem;
-    margin: 1rem 0;
-}
-
-.skills-content .progress .bar span {
-    display: block;
-    height: 100%;
-    border-radius: .3rem;
-    background: var(--main-color);
-}
-
-.skills-column:nth-child(1) .skills-content .progress:nth-child(1) .bar span {
-    width: 90%;
-}
-
-.skills-column:nth-child(1) .skills-content .progress:nth-child(2) .bar span {
-    width: 80%;
-}
-
-.skills-column:nth-child(1) .skills-content .progress:nth-child(3) .bar span {
-    width: 65%;
-}
-
-.skills-column:nth-child(1) .skills-content .progress:nth-child(4) .bar span {
-    width: 75%;
-}
-
-.skills-column:nth-child(2) .skills-content .progress:nth-child(1) .bar span {
-    width: 95%;
-}
-
-.skills-column:nth-child(2) .skills-content .progress:nth-child(2) .bar span {
-    width: 67%;
-}
-
-.skills-column:nth-child(2) .skills-content .progress:nth-child(3) .bar span {
-    width: 85%;
-}
-
-.skills-column:nth-child(2) .skills-content .progress:nth-child(4) .bar span {
-    width: 60%;
-}
 
 .contact {
     min-height: auto;
@@ -749,6 +831,41 @@ section:nth-child(odd) .animate.scroll,
 }
 
 @media (max-width: 991px) {
+
+    /* Add these rules inside the @media (max-width: 991px) block */
+.home {
+    flex-direction: column-reverse; /* Stacks text on top of the image */
+    gap: 3rem;
+}
+
+.home-content {
+    text-align: center;
+}
+
+.home-content .btn-box {
+    margin: 0 auto;
+}
+
+.home-content .text-animate {
+    margin: 0 auto 2rem;
+}
+
+    .home-image-wrapper {
+        width: 70vw;
+        height: 85vw; /* Adjusted for portrait aspect ratio */
+        max-width: 35rem;
+        max-height: 42rem;
+        animation: none; /* Disable floating on mobile */
+    }
+
+    /* Replace the old .home-image-shape rule with this */
+    .home-image-shape {
+        transform: none; /* Ensures no leftover transforms */
+    }
+
+.home-image-wrapper:hover .home-image-shape {
+    transform: scale(1.02); /* Adjust hover effect for mobile */
+}
     .header {
         padding: 2rem 4%;
     }
