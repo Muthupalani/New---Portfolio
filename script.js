@@ -47,3 +47,55 @@ window.onscroll = () => {
 
     footer.classList.toggle('show-animate', this.innerHeight + this.scrollY >= document.scrollingElement.scrollHeight);
 }
+
+
+// Contact form validation
+const contactForm = document.getElementById('contactForm');
+
+contactForm.addEventListener('submit', function(e) {
+    e.preventDefault(); // prevent default submission
+
+    const fullName = document.getElementById('fullName');
+    const email = document.getElementById('email');
+    const mobile = document.getElementById('mobile');
+    const subject = document.getElementById('subject');
+    const message = document.getElementById('message');
+
+    let isValid = true;
+
+    // Reset borders
+    [fullName, email, mobile, subject, message].forEach(field => {
+        field.style.border = "1px solid #ccc";
+    });
+
+    // Check empty fields
+    if (!fullName.value.trim()) { fullName.style.border = "2px solid red"; isValid = false; }
+    if (!email.value.trim()) { email.style.border = "2px solid red"; isValid = false; }
+    if (!mobile.value.trim()) { mobile.style.border = "2px solid red"; isValid = false; }
+    if (!subject.value.trim()) { subject.style.border = "2px solid red"; isValid = false; }
+    if (!message.value.trim()) { message.style.border = "2px solid red"; isValid = false; }
+
+    // Validate email
+    const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,}$/i;
+    if (!emailPattern.test(email.value)) {
+        email.style.border = "2px solid red";
+        isValid = false;
+    }
+
+    // Validate mobile number (exactly 10 digits)
+    const mobilePattern = /^\d{10}$/;
+    if (!mobilePattern.test(mobile.value)) {
+        mobile.style.border = "2px solid red";
+        isValid = false;
+    }
+
+    if (isValid) {
+        // Prepare mailto link
+        const mailtoLink = `mailto:muthupalani1413@gmail.com?subject=${encodeURIComponent(subject.value)}&body=${encodeURIComponent("Name: " + fullName.value + "\nEmail: " + email.value + "\nMobile: " + mobile.value + "\n\nMessage:\n" + message.value)}`;
+        window.location.href = mailtoLink;
+        alert("Form submitted successfully!");
+        contactForm.reset();
+    } else {
+        alert("Please fill all fields correctly.");
+    }
+});
