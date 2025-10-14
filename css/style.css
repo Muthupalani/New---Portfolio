@@ -701,12 +701,42 @@ span {
     display: flex;
 }
 
+/* Find this existing rule and change the margin */
+.contact form .textarea-field {
+    position: relative;
+    margin: .8rem 0 2rem; /* Reduced bottom margin from 2.7rem to 2rem */
+    display: flex;
+}
+
+/* Find this existing rule and reduce padding-bottom */
+.contact {
+    min-height: auto;
+    padding-bottom: 3rem; /* Reduced bottom padding from 7rem to 3rem */
+}
+
+
+/* Find this existing rule for your social icons and adjust the margin */
+.contact-social {
+    margin-top: 2.5rem; /* Reduced top margin from 4rem to 2.5rem */
+    text-align: center;
+}
 .contact form .textarea-field textarea {
     resize: none;
 }
 
 .contact form .btn-box.btns .btn {
     cursor: pointer;
+}
+
+/* STYLES FOR SOCIAL ICONS IN CONTACT SECTION */
+.contact-social {
+    margin-top: 4rem; /* Adds space above the icons */
+    text-align: center;
+}
+
+.contact-social .home-sci {
+    justify-content: center; /* Ensures icons are centered */
+    gap: 1.5rem;
 }
 
 .footer {
